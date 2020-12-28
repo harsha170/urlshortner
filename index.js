@@ -3,22 +3,7 @@ const mongoose = require('mongoose')
 //const ShortUrl = require("./models/shortUrl")
 
 const shortId = require('shortid')
-const ShortUrl = new mongoose.Schema({
-    full:{
-        type: String,
-        required: true
-    },
-    short:{
-        type : String,
-        required: true,
-        default: shortId.generate
-    },
-    clicks:{
-        type: Number,
-        required: true,
-        default: 0
-    }
-})
+const { ShortUrl } = require('./modals/shortUrl')
 //C:\Users\Ajay\OneDrive\Desktop\Zen Guvi\URLshortener\modals
 const app = express()
 
@@ -31,7 +16,7 @@ app.use(express.urlencoded({ extended: false}))
 app.get("/", async (req,res)=>{
     try {
         const ShortUrls = await ShortUrl.findOne()
-        res.render('indeX', { shortUrls: shortUrls})
+        res.render('index', { shortUrls: shortUrls})
     } catch (error) {
         console.log(error)
     }
